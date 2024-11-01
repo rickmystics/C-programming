@@ -2,7 +2,8 @@
 void main()
 {
         int n,sum,b=1,i,c=0;
-        printf("Enter the value of  n to continue fibonacci>        scanf("%d",&n);
+        printf("Enter the value of  n to continue fibonacci \n");
+        scanf("%d",&n);
         for(i=1;i<=n;i++)
         {
                 if(i==1)
