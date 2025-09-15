@@ -8,7 +8,7 @@ struct Node* createNode(int value)
 {
     struct Node* newNode=(struct Node*)malloc(sizeof(struct Node));
     newNode->data=value;
-    newNode->next=NULL;
+    newNode->next=newNode;
     return newNode;
 }
 void insertend(struct Node** head , int value)
@@ -20,33 +20,38 @@ void insertend(struct Node** head , int value)
         return;
     }
     struct Node* temp= *head;
-    while(temp->next !=NULL)
+    while(temp->next !=*head)
     {
         temp=temp->next;
     }
     temp->next=newNode;
+    newNode->next = *head;
 }
 void printlist(struct Node** head)
 {
-    struct Node* temp = *head;
-    while(temp!=NULL)
+    struct Node* temp = * head;
+    struct Node* start = *head;
+    if (start != NULL) 
     {
-        printf("%d->\n",temp->data);
-        temp=temp->next;
-    }
-    printf("NULL\n");
+        do 
+        {
+            printf("%d -> ", temp->data);
+            temp = temp->next;
+        } while (temp != start);
+}
+printf("(back to head)\n");
 }
 void main()
 {
     struct Node* head= NULL;
-    int a ,i,val;
+    int a ,i,value;
     printf("Enter the number of nodes you want \n");
     scanf("%d",&a);
     printf("Enter the nodes\n");
     for(i= 1 ;i<=a;i++)
     {
-        scanf("%d",&val);
-        insertend(&head,val);
+        scanf("%d",&value);
+        insertend(&head,value);
     }
     printlist(&head);
 }
