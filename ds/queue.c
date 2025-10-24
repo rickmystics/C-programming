@@ -60,6 +60,13 @@ int peek(struct Queue* q)
     }
     return (q->front->data);
 }
+bool isEmpty(struct Queue* q )
+{
+    return (q->front==NULL);
+}
+bool isFull(struct Queue* q){
+    return 0;
+}
 void display(struct Queue* q)
 {
     if(q->front==NULL)
