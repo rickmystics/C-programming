@@ -2,26 +2,29 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct Node {
+struct Node {
     int data;
     struct Node* next;
-} Node;
+};
 
-typedef struct {
-    Node* top;   // points to the top node
-    int count;   // optional: to track size
-} stack;
-stack* CreateStack() {
-    stack* s = (stack*)malloc(sizeof(stack));
+struct stack {
+    struct Node* top;   // points to the top node
+    int count;          // optional: to track size
+};
+
+struct stack* CreateStack() {
+    struct stack* s = (struct stack*)malloc(sizeof(struct stack));
     s->top = NULL;
     s->count = 0;
     return s;
 }
-bool isEmpty(stack* s) {
+
+bool isEmpty(struct stack* s) {
     return s->top == NULL;
 }
-void push(stack* s, int value) {
-    Node* temp = (Node*)malloc(sizeof(Node));
+
+void push(struct stack* s, int value) {
+    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
     if (!temp) {
         printf("Stack Overflow! Memory allocation failed\n");
         return;
@@ -32,19 +35,21 @@ void push(stack* s, int value) {
     s->count++;
     printf("Pushed %d\n", value);
 }
-int pop(stack* s) {
+
+int pop(struct stack* s) {
     if (isEmpty(s)) {
         printf("Stack Underflow! Cannot pop!\n");
         return -1;
     }
-    Node* temp = s->top;
+    struct Node* temp = s->top;
     int val = temp->data;
     s->top = s->top->next;
     free(temp);
     s->count--;
     return val;
 }
-int peek(stack* s) {
+
+int peek(struct stack* s) {
     if (isEmpty(s)) {
         printf("Stack is empty!\n");
         return -1;
@@ -52,16 +57,17 @@ int peek(stack* s) {
     return s->top->data;
 }
 
-int size(stack* s) {
+int size(struct stack* s) {
     return s->count;
 }
-void printlist(stack* s) {
+
+void printlist(struct stack* s) {
     if (isEmpty(s)) {
         printf("Stack is empty!\n");
         return;
     }
     printf("Stack elements (top to bottom): ");
-    Node* temp = s->top;
+    struct Node* temp = s->top;
     while (temp != NULL) {
         printf("%d ", temp->data);
         temp = temp->next;
@@ -70,7 +76,7 @@ void printlist(stack* s) {
 }
 
 int main() {
-    stack* s = CreateStack();
+    struct stack* s = CreateStack();
     int a, n;
 
     printf("Enter the number of values to be pushed: ");
@@ -88,3 +94,4 @@ int main() {
 
     return 0;
 }
+   
